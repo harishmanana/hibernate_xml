@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="onetomanypack">
+	<class name="Employee" table="EMPLOYEE">
+		<id name="employeeId" column="EMPLOYEE_ID">
+			<generator class="assigned" />
+		</id>	
+		<property name="firstname" />
+		<property name="lastname" column="lastname" />
+		<property name="birthDate" type="date" column="birth_date" />
+		<set name="vehicle" table="Emp_Vehicles" 
+				inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="EMPLOYEE_ID" not-null="true" />
+            </key>
+            <one-to-many class="onetomanypack.Vehicle" />
+        </set>
+	</class>
+	
+	<class name="Vehicle" table="Emp_Veh">
+		<id name="vehicleNo" column="Vechile_No">
+			<generator class="identity" />
+		</id>	
+
+		<property name="vehicleName" column="Vehicle_Name" />
+
+		<many-to-one name="emp" class="onetomanypack.Employee" fetch="select">
+            <column name="EMPLOYEE_ID" not-null="true" />
+        </many-to-one>
+	</class>
+</hibernate-mapping>

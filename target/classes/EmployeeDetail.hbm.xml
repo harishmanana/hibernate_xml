@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="onetoonepack">
+    <class name="EmployeeDetail" table="EMPLOYEEDETAIL">
+
+ 		<id name="employeeId" type="java.lang.Long">
+			<column name="EMPLOYEE_ID" />
+			<generator class="foreign">
+				<param name="property">employee</param>
+			</generator>
+		</id>
+		<one-to-one name="employee" class="onetoonepack.Employee"
+			constrained="true"></one-to-one>
+		
+        <property name="city" column="CITY"/>
+	</class>
+</hibernate-mapping>
